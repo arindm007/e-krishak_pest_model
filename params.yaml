@@ -12,10 +12,10 @@ train:
   data: data/dataset.yaml
   hyp: src/data/hyps/hyp.scratch-low.yaml
   epochs: 2
-  batch_size: 20
+  batch_size: 16
   imgsz: 640
   rect: false
-  resume: false
+  resume: True
   nosave: false
   noval: false
   noautoanchor: false

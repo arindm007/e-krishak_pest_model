@@ -36,10 +36,10 @@ from tqdm import tqdm
 # from dotenv import load_dotenv
 # import mlflow
 # load_dotenv()
-# os.environ['MLFLOW_TRACKING_URI'] = 'postgresql+psycopg2://ih_blr_admin:admin123@192.168.0.100:5432/mlflow'
-# os.environ['MLFLOW_S3_ENDPOINT_URL'] = 'http://192.168.0.100:7005'
-# os.environ['AWS_ACCESS_KEY_ID'] = os.getenv("ACCESS_KEY")
-# os.environ['AWS_SECRET_ACCESS_KEY'] = os.getenv("SECRET_KEY")
+# # os.environ['MLFLOW_TRACKING_URI'] = 'postgresql+psycopg2://ih_blr_admin:admin123@192.168.0.100:5432/mlflow'
+# # os.environ['MLFLOW_S3_ENDPOINT_URL'] = 'http://192.168.0.100:7005'
+# # os.environ['AWS_ACCESS_KEY_ID'] = os.getenv("ACCESS_KEY")
+# # os.environ['AWS_SECRET_ACCESS_KEY'] = os.getenv("SECRET_KEY")
 
 
 # MLFLOW_URI= "http://localhost:5000/"
