@@ -1,0 +1,108 @@
+stages:
+    prepare:
+        cmd: python src/prepare.py
+        deps:
+        - src/prepare.py
+        - data/data.zip
+        outs:
+        - data/dataset.yaml
+    train:
+        cmd: python src/segment/train.py
+        deps:
+        - src/segment/train.py
+        - data/dataset.yaml
+        # params:
+        # - train
+        outs:
+        - model/weights/best.pt
+        metrics:
+            - dvclive/metrics.json:
+                cache: false
+        plots:
+            - dvclive/plots/metrics/metrics/mAP_0.5.tsv: 
+                y: metrics/mAP_0.5
+                x: step
+                title: mAP_0.5
+                x_label: epoch
+                y_label: mAP_0.5
+            - dvclive/plots/metrics/metrics/mAP_0.5-0.95.tsv:
+                y: metrics/mAP_0.5-0.95
+                x: step
+                title: mAP_0.5-0.95
+                x_label: epoch
+                y_label: mAP_0.5-0.95
+            - dvclive/plots/metrics/metrics/precision.tsv:
+                y: metrics/precision
+                x: step
+                title: Precision
+                x_label: epoch
+                y_label: precision
+            - dvclive/plots/metrics/metrics/recall.tsv:
+                y: metrics/recall
+                x: step
+                title: Recall
+                x_label: epoch
+                y_label: recall
+            - dvclive/plots/metrics/train/box_loss.tsv:
+                y: train/box_loss
+                x: step
+                title: Training Box Loss
+                x_label: epoch
+                y_label: box_loss
+            - dvclive/plots/metrics/train/cls_loss.tsv:
+                y: train/cls_loss
+                x: step
+                title: Training Class Loss
+                x_label: epoch
+                y_label: cls_loss
+            - dvclive/plots/metrics/train/obj_loss.tsv:
+                y: train/obj_loss
+                x: step
+                title: Training Object Loss
+                x_label: epoch
+                y_label: obj_loss
+            - dvclive/plots/metrics/val/box_loss.tsv:
+                y: val/box_loss
+                x: step
+                title: Validation Box Loss
+                x_label: epoch
+                y_label: box_loss
+            - dvclive/plots/metrics/val/cls_loss.tsv:
+                y: val/cls_loss
+                x: step
+                title: Validation Class Loss
+                x_label: epoch
+                y_label: cls_loss
+            - dvclive/plots/metrics/val/obj_loss.tsv:
+                y: val/obj_loss
+                x: step
+                title: Validation Object Loss
+                x_label: epoch
+                y_label: obj_loss
+            - model/confusion_matrix.png
+            - model/labels.jpg
+            - model/labels_correlogram.jpg
+            - model/results.png
+            - model/BoxF1_curve.png
+            - model/BoxP_curve.png
+            - model/BoxPR_curve.png
+            - model/BoxR_curve.png
+            - model/MaskF1_curve.png
+            - model/MaskP_curve.png
+            - model/MaskPR_curve.png
+            - model/train_batch0.jpg
+            - model/train_batch1.jpg
+            - model/val_batch0_labels.jpg
+            - model/val_batch0_pred.jpg
+    val:
+        cmd: python src/segment/val.py
+        deps:
+        - data/dataset.yaml
+
+    export:
+        cmd: python src/export.py
+        deps:
+        - src/export.py
+        - model/weights/best.pt
+        outs:
+        - model/weights/best.onnx
